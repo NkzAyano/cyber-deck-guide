@@ -77,19 +77,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "CYBER DECK NKZ — Comandos Linux, Termux, PowerShell e CMD" },
+      {
+        name: "description",
+        content:
+          "Central de consulta e estudo de comandos de terminal para Linux, Termux, PowerShell e CMD, com foco em redes, sistemas e cibersegurança ética.",
+      },
+      { name: "author", content: "CYBER DECK NKZ" },
+      { name: "theme-color", content: "#0b1512" },
+      { property: "og:title", content: "CYBER DECK NKZ" },
+      {
+        property: "og:description",
+        content: "Enciclopédia de terminal: Linux, Termux, PowerShell e CMD.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
@@ -102,7 +112,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR" className="dark">
       <head>
         <HeadContent />
       </head>
@@ -114,13 +124,43 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+const NAV = [
+  { to: "/", label: "Início", icon: Home },
+  { to: "/buscar", label: "Buscar", icon: Search },
+  { to: "/ciberseguranca", label: "Cyber", icon: ShieldAlert },
+  { to: "/estudos", label: "Estudos", icon: GraduationCap },
+  { to: "/favoritos", label: "Favoritos", icon: Star },
+] as const;
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="mx-auto flex min-h-screen w-full max-w-2xl flex-col pb-20">
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </div>
+      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 backdrop-blur">
+        <ul className="mx-auto grid max-w-2xl grid-cols-5">
+          {NAV.map(({ to, label, icon: Icon }) => (
+            <li key={to}>
+              <Link
+                to={to}
+                activeOptions={{ exact: to === "/" }}
+                activeProps={{ className: "text-primary" }}
+                inactiveProps={{ className: "text-muted-foreground" }}
+                className="flex flex-col items-center gap-0.5 py-2.5 text-[10px] transition-colors"
+              >
+                <Icon className="h-4.5 w-4.5" />
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <Toaster position="top-center" />
     </QueryClientProvider>
   );
 }
+
