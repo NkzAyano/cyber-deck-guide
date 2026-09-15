@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BuscarRouteImport } from './routes/buscar'
+import { Route as CibersegurancaRouteImport } from './routes/ciberseguranca'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
+import { Route as ComandoIdRouteImport } from './routes/comando.$id'
 import { Route as SistemaSystemRouteImport } from './routes/sistema.$system'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +26,21 @@ const BuscarRoute = BuscarRouteImport.update({
   path: '/buscar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CibersegurancaRoute = CibersegurancaRouteImport.update({
+  id: '/ciberseguranca',
+  path: '/ciberseguranca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComandoIdRoute = ComandoIdRouteImport.update({
+  id: '/comando/$id',
+  path: '/comando/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SistemaSystemRoute = SistemaSystemRouteImport.update({
   id: '/sistema/$system',
   path: '/sistema/$system',
@@ -32,30 +50,61 @@ const SistemaSystemRoute = SistemaSystemRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
+  '/ciberseguranca': typeof CibersegurancaRoute
+  '/favoritos': typeof FavoritosRoute
+  '/comando/$id': typeof ComandoIdRoute
   '/sistema/$system': typeof SistemaSystemRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
+  '/ciberseguranca': typeof CibersegurancaRoute
+  '/favoritos': typeof FavoritosRoute
+  '/comando/$id': typeof ComandoIdRoute
   '/sistema/$system': typeof SistemaSystemRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
+  '/ciberseguranca': typeof CibersegurancaRoute
+  '/favoritos': typeof FavoritosRoute
+  '/comando/$id': typeof ComandoIdRoute
   '/sistema/$system': typeof SistemaSystemRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/buscar' | '/sistema/$system'
+  fullPaths:
+    | '/'
+    | '/buscar'
+    | '/ciberseguranca'
+    | '/favoritos'
+    | '/comando/$id'
+    | '/sistema/$system'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/buscar' | '/sistema/$system'
-  id: '__root__' | '/' | '/buscar' | '/sistema/$system'
+  to:
+    | '/'
+    | '/buscar'
+    | '/ciberseguranca'
+    | '/favoritos'
+    | '/comando/$id'
+    | '/sistema/$system'
+  id:
+    | '__root__'
+    | '/'
+    | '/buscar'
+    | '/ciberseguranca'
+    | '/favoritos'
+    | '/comando/$id'
+    | '/sistema/$system'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BuscarRoute: typeof BuscarRoute
+  CibersegurancaRoute: typeof CibersegurancaRoute
+  FavoritosRoute: typeof FavoritosRoute
+  ComandoIdRoute: typeof ComandoIdRoute
   SistemaSystemRoute: typeof SistemaSystemRoute
 }
 
@@ -75,6 +124,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BuscarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ciberseguranca': {
+      id: '/ciberseguranca'
+      path: '/ciberseguranca'
+      fullPath: '/ciberseguranca'
+      preLoaderRoute: typeof CibersegurancaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comando/$id': {
+      id: '/comando/$id'
+      path: '/comando/$id'
+      fullPath: '/comando/$id'
+      preLoaderRoute: typeof ComandoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sistema/$system': {
       id: '/sistema/$system'
       path: '/sistema/$system'
@@ -88,6 +158,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BuscarRoute: BuscarRoute,
+  CibersegurancaRoute: CibersegurancaRoute,
+  FavoritosRoute: FavoritosRoute,
+  ComandoIdRoute: ComandoIdRoute,
   SistemaSystemRoute: SistemaSystemRoute,
 }
 export const routeTree = rootRouteImport
