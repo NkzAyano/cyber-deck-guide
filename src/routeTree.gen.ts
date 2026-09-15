@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BuscarRouteImport } from './routes/buscar'
 import { Route as CibersegurancaRouteImport } from './routes/ciberseguranca'
+import { Route as EstudosRouteImport } from './routes/estudos'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as ComandoIdRouteImport } from './routes/comando.$id'
 import { Route as SistemaSystemRouteImport } from './routes/sistema.$system'
@@ -29,6 +30,11 @@ const BuscarRoute = BuscarRouteImport.update({
 const CibersegurancaRoute = CibersegurancaRouteImport.update({
   id: '/ciberseguranca',
   path: '/ciberseguranca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstudosRoute = EstudosRouteImport.update({
+  id: '/estudos',
+  path: '/estudos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FavoritosRoute = FavoritosRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/ciberseguranca': typeof CibersegurancaRoute
+  '/estudos': typeof EstudosRoute
   '/favoritos': typeof FavoritosRoute
   '/comando/$id': typeof ComandoIdRoute
   '/sistema/$system': typeof SistemaSystemRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/ciberseguranca': typeof CibersegurancaRoute
+  '/estudos': typeof EstudosRoute
   '/favoritos': typeof FavoritosRoute
   '/comando/$id': typeof ComandoIdRoute
   '/sistema/$system': typeof SistemaSystemRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/ciberseguranca': typeof CibersegurancaRoute
+  '/estudos': typeof EstudosRoute
   '/favoritos': typeof FavoritosRoute
   '/comando/$id': typeof ComandoIdRoute
   '/sistema/$system': typeof SistemaSystemRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/ciberseguranca'
+    | '/estudos'
     | '/favoritos'
     | '/comando/$id'
     | '/sistema/$system'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/ciberseguranca'
+    | '/estudos'
     | '/favoritos'
     | '/comando/$id'
     | '/sistema/$system'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/ciberseguranca'
+    | '/estudos'
     | '/favoritos'
     | '/comando/$id'
     | '/sistema/$system'
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BuscarRoute: typeof BuscarRoute
   CibersegurancaRoute: typeof CibersegurancaRoute
+  EstudosRoute: typeof EstudosRoute
   FavoritosRoute: typeof FavoritosRoute
   ComandoIdRoute: typeof ComandoIdRoute
   SistemaSystemRoute: typeof SistemaSystemRoute
@@ -129,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/ciberseguranca'
       fullPath: '/ciberseguranca'
       preLoaderRoute: typeof CibersegurancaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudos': {
+      id: '/estudos'
+      path: '/estudos'
+      fullPath: '/estudos'
+      preLoaderRoute: typeof EstudosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/favoritos': {
@@ -159,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BuscarRoute: BuscarRoute,
   CibersegurancaRoute: CibersegurancaRoute,
+  EstudosRoute: EstudosRoute,
   FavoritosRoute: FavoritosRoute,
   ComandoIdRoute: ComandoIdRoute,
   SistemaSystemRoute: SistemaSystemRoute,
