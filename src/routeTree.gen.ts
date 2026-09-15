@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BuscarRouteImport } from './routes/buscar'
+import { Route as CibersegurancaRouteImport } from './routes/ciberseguranca'
+import { Route as EstudosRouteImport } from './routes/estudos'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
+import { Route as ComandoIdRouteImport } from './routes/comando.$id'
+import { Route as SistemaSystemRouteImport } from './routes/sistema.$system'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuscarRoute = BuscarRouteImport.update({
+  id: '/buscar',
+  path: '/buscar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CibersegurancaRoute = CibersegurancaRouteImport.update({
+  id: '/ciberseguranca',
+  path: '/ciberseguranca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstudosRoute = EstudosRouteImport.update({
+  id: '/estudos',
+  path: '/estudos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComandoIdRoute = ComandoIdRouteImport.update({
+  id: '/comando/$id',
+  path: '/comando/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SistemaSystemRoute = SistemaSystemRouteImport.update({
+  id: '/sistema/$system',
+  path: '/sistema/$system',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/ciberseguranca': typeof CibersegurancaRoute
+  '/estudos': typeof EstudosRoute
+  '/favoritos': typeof FavoritosRoute
+  '/comando/$id': typeof ComandoIdRoute
+  '/sistema/$system': typeof SistemaSystemRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/ciberseguranca': typeof CibersegurancaRoute
+  '/estudos': typeof EstudosRoute
+  '/favoritos': typeof FavoritosRoute
+  '/comando/$id': typeof ComandoIdRoute
+  '/sistema/$system': typeof SistemaSystemRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/ciberseguranca': typeof CibersegurancaRoute
+  '/estudos': typeof EstudosRoute
+  '/favoritos': typeof FavoritosRoute
+  '/comando/$id': typeof ComandoIdRoute
+  '/sistema/$system': typeof SistemaSystemRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/buscar'
+    | '/ciberseguranca'
+    | '/estudos'
+    | '/favoritos'
+    | '/comando/$id'
+    | '/sistema/$system'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/buscar'
+    | '/ciberseguranca'
+    | '/estudos'
+    | '/favoritos'
+    | '/comando/$id'
+    | '/sistema/$system'
+  id:
+    | '__root__'
+    | '/'
+    | '/buscar'
+    | '/ciberseguranca'
+    | '/estudos'
+    | '/favoritos'
+    | '/comando/$id'
+    | '/sistema/$system'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BuscarRoute: typeof BuscarRoute
+  CibersegurancaRoute: typeof CibersegurancaRoute
+  EstudosRoute: typeof EstudosRoute
+  FavoritosRoute: typeof FavoritosRoute
+  ComandoIdRoute: typeof ComandoIdRoute
+  SistemaSystemRoute: typeof SistemaSystemRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/buscar': {
+      id: '/buscar'
+      path: '/buscar'
+      fullPath: '/buscar'
+      preLoaderRoute: typeof BuscarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ciberseguranca': {
+      id: '/ciberseguranca'
+      path: '/ciberseguranca'
+      fullPath: '/ciberseguranca'
+      preLoaderRoute: typeof CibersegurancaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudos': {
+      id: '/estudos'
+      path: '/estudos'
+      fullPath: '/estudos'
+      preLoaderRoute: typeof EstudosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comando/$id': {
+      id: '/comando/$id'
+      path: '/comando/$id'
+      fullPath: '/comando/$id'
+      preLoaderRoute: typeof ComandoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema/$system': {
+      id: '/sistema/$system'
+      path: '/sistema/$system'
+      fullPath: '/sistema/$system'
+      preLoaderRoute: typeof SistemaSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BuscarRoute: BuscarRoute,
+  CibersegurancaRoute: CibersegurancaRoute,
+  EstudosRoute: EstudosRoute,
+  FavoritosRoute: FavoritosRoute,
+  ComandoIdRoute: ComandoIdRoute,
+  SistemaSystemRoute: SistemaSystemRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
