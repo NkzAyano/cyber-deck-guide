@@ -151,7 +151,7 @@ export function commandOfTheDay(): Command {
   const now = new Date();
   const start = Date.UTC(now.getUTCFullYear(), 0, 0);
   const dayOfYear = Math.floor((now.getTime() - start) / 86400000);
-  return commands[dayOfYear % commands.length];
+  return commands[dayOfYear % commands.length]!;
 }
 
 export function commandById(id: string): Command | undefined {

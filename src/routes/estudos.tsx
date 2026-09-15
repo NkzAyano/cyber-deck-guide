@@ -88,7 +88,7 @@ function Estudos() {
   const answer = (opt: string) => {
     if (chosen) return;
     setChosen(opt);
-    if (opt === quiz[step].answer) setScore((s) => s + 1);
+    if (opt === quiz[step]?.answer) setScore((s) => s + 1);
   };
 
   const next = () => {
@@ -137,17 +137,17 @@ function Estudos() {
             <h2 className="mb-2 text-[11px] tracking-[0.25em] text-muted-foreground uppercase">
               Quiz · {SYSTEMS.find((s) => s.id === quizSystem)?.name}
             </h2>
-            {step < quiz.length ? (
+            {step < quiz.length && quiz[step] ? (
               <>
                 <p className="text-xs text-muted-foreground">
                   Pergunta {step + 1} de {quiz.length}
                 </p>
                 <p className="mt-2 text-sm leading-relaxed">
-                  Qual comando faz isso: “{quiz[step].prompt}”
+                  Qual comando faz isso: “{quiz[step]!.prompt}”
                 </p>
                 <div className="mt-3 flex flex-col gap-2">
-                  {quiz[step].options.map((opt) => {
-                    const correct = opt === quiz[step].answer;
+                  {quiz[step]!.options.map((opt) => {
+                    const correct = opt === quiz[step]!.answer;
                     const state = !chosen
                       ? "border-border"
                       : correct

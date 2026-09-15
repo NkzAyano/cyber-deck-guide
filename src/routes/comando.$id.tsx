@@ -126,7 +126,7 @@ function CommandPage() {
             </h2>
             <div className="flex flex-col gap-2">
               {command.alternatives.map((alt) => {
-                const target = findByName(alt.code.split(" ")[0]).find((c) => c.system === alt.system);
+                const target = findByName(alt.code.split(" ")[0] ?? alt.code).find((c) => c.system === alt.system);
                 const body = (
                   <div className="card-deck card-deck-hover grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 p-2.5">
                     <SystemBadge system={alt.system} />
