@@ -6,7 +6,7 @@ import { CommandCard } from "@/components/deck/CommandCard";
 import { PageHeader } from "@/components/deck/PageHeader";
 import { TerminalBlock } from "@/components/deck/Terminal";
 import { SYSTEM_META } from "@/components/deck/SystemBadge";
-import { searchCommands, findByName, SYSTEMS } from "@/data/commands";
+import { searchCommands, findByName, SYSTEMS, commands } from "@/data/commands";
 import type { SystemId } from "@/data/types";
 import { useStore } from "@/lib/store";
 
@@ -45,7 +45,10 @@ function Buscar() {
     if (!term) return null;
     const direct = findByName(term);
     const byTag = results.filter((c) => c.tags.includes(term) || c.name.toLowerCase() === term);
-    const pool = direct.length ? direct : byTag;
+    const related = commands.filter((c) =>
+      c.alternatives.some((a) => a.code.toLowerCase().split(/[\s(]/)[0] === term),
+    );
+    const pool = [...new Set([...direct, ...(direct.length ? [] : byTag), ...related])];
     if (pool.length < 2) return null;
     const map = new Map<SystemId, (typeof pool)[number]>();
     for (const c of pool) if (!map.has(c.system)) map.set(c.system, c);
